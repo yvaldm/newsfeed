@@ -19,8 +19,7 @@ public class TwitterStreamReader {
         Configuration build = cb.build();
 
         TwitterStream twitterStream = new TwitterStreamFactory(build).getInstance();
-        twitterStream.addListener(new SimpleStatusListener());
-
+        twitterStream.addListener(new TwitterFeedListener());
         twitterStream.filter("java");
     }
 

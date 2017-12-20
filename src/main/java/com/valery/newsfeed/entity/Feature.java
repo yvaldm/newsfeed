@@ -1,12 +1,12 @@
 package com.valery.newsfeed.entity;
 
-public class Token {
+public class Feature {
     private int startPos;
     private int endPos;
     private String value;
     private String entity;
 
-    public Token(int startPos, int endPos, String value, String entity) {
+    public Feature(int startPos, int endPos, String value, String entity) {
         this.startPos = startPos;
         this.endPos = endPos;
         this.value = value;
