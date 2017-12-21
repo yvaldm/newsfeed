@@ -1,16 +1,16 @@
 package com.valery.newsfeed.pubsub;
 
-import com.valery.newsfeed.entity.FeaturedMessage;
+import com.valery.newsfeed.entity.Message;
 
 public class NewFeatureEvent {
 
-    private FeaturedMessage feature;
+    private Message feature;
 
-    public NewFeatureEvent(FeaturedMessage feature) {
+    public NewFeatureEvent(Message feature) {
         this.feature = feature;
     }
 
-    public FeaturedMessage getFeature() {
+    public Message getFeature() {
         return feature;
     }
 }

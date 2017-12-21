@@ -2,18 +2,12 @@ package com.valery.newsfeed.entity;
 
 import java.util.List;
 
-public class FeaturedMessage {
+public class Message {
 
-    private String text;
     private List<Feature> features;
 
-    public FeaturedMessage(String text, List<Feature> features) {
-        this.text = text;
+    public Message(List<Feature> features) {
         this.features = features;
-    }
-
-    public String getText() {
-        return text;
     }
 
     public List<Feature> getFeatures() {

@@ -6,11 +6,10 @@ public class Feature {
     private String value;
     private String entity;
 
-    public Feature(int startPos, int endPos, String value, String entity) {
+    public Feature(int startPos, int endPos, String value) {
         this.startPos = startPos;
         this.endPos = endPos;
         this.value = value;
-        this.entity = entity;
     }
 
     public int getStartPos() {

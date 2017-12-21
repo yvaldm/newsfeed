@@ -10,12 +10,11 @@ public class TwitterFeedListener extends StatusAdapter {
 
     public void onStatus(Status status) {
 
-        EventBus instance = EventBusSingleton.getInstance();
+        EventBus eventBus = EventBusSingleton.getInstance();
 
         String lang = status.getLang();
         if ("en".equals(lang)) {
-            String text = status.getText();
-            instance.post(new NewMessageEvent(text));
+            eventBus.post(new NewMessageEvent(status.getText()));
         }
     }
 
