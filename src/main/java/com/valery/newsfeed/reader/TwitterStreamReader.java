@@ -5,9 +5,10 @@ import twitter4j.TwitterStreamFactory;
 import twitter4j.conf.Configuration;
 import twitter4j.conf.ConfigurationBuilder;
 
-public class TwitterStreamReader {
+public class TwitterStreamReader implements Runnable {
 
-    public static void streamFeed() {
+    @Override
+    public void run() {
 
         ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setDebugEnabled(true)
@@ -22,5 +23,4 @@ public class TwitterStreamReader {
         twitterStream.addListener(new TwitterFeedListener());
         twitterStream.filter("java");
     }
-
 }

@@ -1,21 +1,17 @@
 package com.valery.newsfeed;
 
 import com.valery.newsfeed.reader.FacebookStreamReader;
-import facebook4j.FacebookException;
+import com.valery.newsfeed.reader.TwitterStreamReader;
 
 public class Main {
 
-    public static void main(String[] args) throws FacebookException {
+    public static void main(String[] args) {
 
-//        TwitterStreamReader str = new TwitterStreamReader();
-//        str.streamFeed();
+        Thread facebook = new Thread(new FacebookStreamReader());
+        facebook.start();
 
-        FacebookStreamReader facebookStreamReader = new FacebookStreamReader();
-
-
-        facebookStreamReader.streamFeed();
-
+        Thread twitter = new Thread(new TwitterStreamReader());
+        twitter.start();
 
     }
-
 }

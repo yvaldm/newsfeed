@@ -10,10 +10,12 @@ import facebook4j.FacebookFactory;
 import facebook4j.ResponseList;
 import facebook4j.conf.ConfigurationBuilder;
 
-public class FacebookStreamReader {
+public class FacebookStreamReader implements Runnable {
 
     // https://developers.facebook.com/tools/explorer -- to get access token
-    public static void streamFeed() throws FacebookException {
+
+    @Override
+    public void run() {
         ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setDebugEnabled(true)
                 .setOAuthAppId("1628819323844977")
@@ -23,10 +25,14 @@ public class FacebookStreamReader {
         FacebookFactory ff = new FacebookFactory(cb.build());
         Facebook facebook = ff.getInstance();
 
-        ResponseList<Event> facebookEvents = facebook.searchEvents("US");
+        ResponseList<Event> facebookEvents;
 
-        EventBus eventBus = EventBusSingleton.getInstance();
-        facebookEvents.stream().forEach(f -> eventBus.post(new NewMessageEvent(f.getName())));
-
+        try {
+            facebookEvents = facebook.searchEvents("US");
+            EventBus eventBus = EventBusSingleton.getInstance();
+            facebookEvents.stream().forEach(f -> eventBus.post(new NewMessageEvent(f.getName())));
+        } catch (FacebookException e) {
+            System.err.println(e);
+        }
     }
 }
