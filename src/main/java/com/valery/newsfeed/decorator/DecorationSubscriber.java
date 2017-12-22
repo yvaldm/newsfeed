@@ -1,11 +1,11 @@
-package com.valery.newsfeed.producer;
+package com.valery.newsfeed.decorator;
 
 import com.google.common.eventbus.Subscribe;
 import com.valery.newsfeed.pubsub.AnalyzedTextEvent;
 
-public class TextEnrichmentSubscriber {
+public class DecorationSubscriber {
 
-    private TextEnrichmentService textEnrichmentService = new TextEnrichmentService();
+    private DecorationService textEnrichmentService = new DecorationService();
 
     @Subscribe
     public void handleFeature(AnalyzedTextEvent event) {

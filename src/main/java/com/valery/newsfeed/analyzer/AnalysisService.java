@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 
-public class TextAnalysisService {
+public class AnalysisService {
 
     private static Properties props = new Properties();
 
@@ -53,9 +53,7 @@ public class TextAnalysisService {
             }
         }
 
-        Message featuredMessage = new Message(words);
-        AnalyzedTextEvent newFeatureEvent = new AnalyzedTextEvent(featuredMessage);
-        eventBus.post(newFeatureEvent);
+        eventBus.post(new AnalyzedTextEvent(new Message(words)));
     }
 
     private List<Word> split(String text) {

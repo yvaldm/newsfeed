@@ -1,8 +1,8 @@
 package com.valery.newsfeed.pubsub;
 
 import com.google.common.eventbus.EventBus;
-import com.valery.newsfeed.analyzer.TextAnalysisSubscriber;
-import com.valery.newsfeed.producer.TextEnrichmentSubscriber;
+import com.valery.newsfeed.analyzer.AnalysisSubscriber;
+import com.valery.newsfeed.decorator.DecorationSubscriber;
 
 public class EventBusSingleton {
 
@@ -15,8 +15,8 @@ public class EventBusSingleton {
 
         if (INSTANCE == null) {
             INSTANCE = new EventBus();
-            INSTANCE.register(new TextAnalysisSubscriber());
-            INSTANCE.register(new TextEnrichmentSubscriber());
+            INSTANCE.register(new AnalysisSubscriber());
+            INSTANCE.register(new DecorationSubscriber());
         }
 
         return INSTANCE;

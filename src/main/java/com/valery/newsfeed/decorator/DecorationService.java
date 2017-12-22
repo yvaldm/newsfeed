@@ -1,11 +1,11 @@
-package com.valery.newsfeed.producer;
+package com.valery.newsfeed.decorator;
 
 import com.valery.newsfeed.entity.Message;
 import com.valery.newsfeed.entity.Word;
 
 import java.util.List;
 
-public class TextEnrichmentService {
+public class DecorationService {
 
     /**
      * Enrich message words with HTML tags if they are natural language features, link or twitter acounts

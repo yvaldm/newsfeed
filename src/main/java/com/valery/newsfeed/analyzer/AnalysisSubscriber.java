@@ -3,9 +3,9 @@ package com.valery.newsfeed.analyzer;
 import com.google.common.eventbus.Subscribe;
 import com.valery.newsfeed.pubsub.RawTextEvent;
 
-public class TextAnalysisSubscriber {
+public class AnalysisSubscriber {
 
-    private TextAnalysisService tokenizer = new TextAnalysisService();
+    private AnalysisService tokenizer = new AnalysisService();
 
     @Subscribe
     public void handleNewMessageEvent(RawTextEvent event) {

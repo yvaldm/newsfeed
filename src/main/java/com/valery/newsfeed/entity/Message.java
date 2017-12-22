@@ -6,8 +6,8 @@ public class Message {
 
     private List<Word> words;
 
-    public Message(List<Word> features) {
-        this.words = features;
+    public Message(List<Word> words) {
+        this.words = words;
     }
 
     public List<Word> getWords() {
