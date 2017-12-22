@@ -12,6 +12,7 @@ public class EventBusSingleton {
     }
 
     public static synchronized EventBus getInstance() {
+
         if (INSTANCE == null) {
             INSTANCE = new EventBus();
             INSTANCE.register(new TokenizerSubscriber());
