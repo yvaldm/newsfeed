@@ -4,13 +4,13 @@ import com.valery.newsfeed.entity.Message;
 
 public class NewFeatureEvent {
 
-    private Message feature;
+    private Message message;
 
     public NewFeatureEvent(Message feature) {
-        this.feature = feature;
+        this.message = feature;
     }
 
-    public Message getFeature() {
-        return feature;
+    public Message getMessage() {
+        return message;
     }
 }

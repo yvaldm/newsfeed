@@ -10,28 +10,41 @@ import facebook4j.FacebookFactory;
 import facebook4j.ResponseList;
 import facebook4j.conf.ConfigurationBuilder;
 
+/**
+ * FacebookStreamReader
+ * <p>
+ * Reads events feed from Facebook
+ * <p>
+ * https://developers.facebook.com/tools/explorer -- to get access token
+ */
 public class FacebookStreamReader implements Runnable {
-
-    // https://developers.facebook.com/tools/explorer -- to get access token
 
     @Override
     public void run() {
         ConfigurationBuilder cb = new ConfigurationBuilder();
+
         cb.setDebugEnabled(true)
                 .setOAuthAppId("1628819323844977")
                 .setOAuthAppSecret("41321fddf81df0bdd069e20789dbf4d9")
                 .setOAuthAccessToken("EAACEdEose0cBAEQAgORpyyEdBSJHZCgHY6TgycXkVuZBLeqsuIFNZCmPIZBi85cHoejIZAyFegyeOoOpzEx7T3ZAZAQir54JlL6M9ALmqfBFkWIl9JvhB3s0vXgCiU647dTjsDlxs2pOx860QZAKZAebjEyLLQbeFZC86FcJlMfb5xNdBDakMjubxKfHk4fCnlZA84ZD");
 
-        FacebookFactory ff = new FacebookFactory(cb.build());
-        Facebook facebook = ff.getInstance();
+        FacebookFactory facebookFactory = new FacebookFactory(cb.build());
+        Facebook facebook = facebookFactory.getInstance();
 
         ResponseList<Event> facebookEvents;
 
         try {
-            facebookEvents = facebook.searchEvents("US");
-            EventBus eventBus = EventBusSingleton.getInstance();
-            facebookEvents.stream().forEach(f -> eventBus.post(new NewMessageEvent(f.getName())));
+
+            while (true) {
+                facebookEvents = facebook.searchEvents("Trump");
+                EventBus eventBus = EventBusSingleton.getInstance();
+                facebookEvents.stream().forEach(event -> eventBus.post(new NewMessageEvent(event.getName())));
+                Thread.sleep(5000); // fetch new info every 5 seconds
+            }
+
         } catch (FacebookException e) {
+            System.err.println(e);
+        } catch (InterruptedException e) {
             System.err.println(e);
         }
     }

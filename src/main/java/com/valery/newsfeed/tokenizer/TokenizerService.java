@@ -1,8 +1,8 @@
 package com.valery.newsfeed.tokenizer;
 
 import com.google.common.eventbus.EventBus;
-import com.valery.newsfeed.entity.Feature;
 import com.valery.newsfeed.entity.Message;
+import com.valery.newsfeed.entity.Word;
 import com.valery.newsfeed.pubsub.EventBusSingleton;
 import com.valery.newsfeed.pubsub.NewFeatureEvent;
 import edu.stanford.nlp.ling.CoreAnnotations;
@@ -29,7 +29,7 @@ public class TokenizerService {
     public void process(String text) {
         EventBus eventBus = EventBusSingleton.getInstance();
 
-        List<Feature> words = split(text);
+        List<Word> words = split(text);
         detectAdditionalFeatures(words);
 
         Annotation document = new Annotation(text);
@@ -43,11 +43,11 @@ public class TokenizerService {
                 String namedEntity = token.get(CoreAnnotations.NamedEntityTagAnnotation.class);
 
                 if (!"O".equals(namedEntity)) {
-                    Optional<Feature> first = words.stream().filter(f -> f.getStartPos() == token.beginPosition()).findFirst();
+                    Optional<Word> word = words.stream().filter(f -> f.getStartPos() == token.beginPosition()).findFirst();
 
-                    if (first.isPresent()) {
-                        Feature feature = first.get();
-                        feature.setEntity(namedEntity);
+                    if (word.isPresent()) {
+                        Word feature = word.get();
+                        feature.setFeature(namedEntity);
                     }
                 }
             }
@@ -58,32 +58,30 @@ public class TokenizerService {
         eventBus.post(newFeatureEvent);
     }
 
-    private List<Feature> split(String text) {
+    private List<Word> split(String text) {
 
         String[] words = text.split(" ");
-
-        List<Feature> features = new ArrayList<>(words.length);
+        List<Word> features = new ArrayList<>(words.length);
 
         for (int i = 0; i < words.length; i++) {
-
             int startPos = text.indexOf(words[i]);
             int endPos = startPos + words[i].length();
 
-            features.add(new Feature(startPos, endPos, words[i]));
+            features.add(new Word(startPos, endPos, words[i]));
         }
 
         return features;
     }
 
-    private void detectAdditionalFeatures(List<Feature> text) {
-        for (Feature feature : text) {
+    private void detectAdditionalFeatures(List<Word> words) {
+
+        for (Word feature : words) {
             String value = feature.getValue();
             if (value.startsWith("@") && value.length() > 1) {
-                feature.setEntity("TWITTER");
+                feature.setFeature("TWITTER");
             } else if (value.startsWith("http")) {
-                feature.setEntity("LINK");
+                feature.setFeature("LINK");
             }
         }
     }
-
 }

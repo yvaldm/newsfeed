@@ -4,14 +4,14 @@ import java.util.List;
 
 public class Message {
 
-    private List<Feature> features;
+    private List<Word> words;
 
-    public Message(List<Feature> features) {
-        this.features = features;
+    public Message(List<Word> features) {
+        this.words = features;
     }
 
-    public List<Feature> getFeatures() {
-        return features;
+    public List<Word> getWords() {
+        return words;
     }
 
 }

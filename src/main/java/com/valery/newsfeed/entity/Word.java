@@ -1,12 +1,13 @@
 package com.valery.newsfeed.entity;
 
-public class Feature {
+public class Word {
+
     private int startPos;
     private int endPos;
     private String value;
-    private String entity;
+    private String feature;
 
-    public Feature(int startPos, int endPos, String value) {
+    public Word(int startPos, int endPos, String value) {
         this.startPos = startPos;
         this.endPos = endPos;
         this.value = value;
@@ -36,18 +37,18 @@ public class Feature {
         this.value = value;
     }
 
-    public String getEntity() {
-        return entity;
+    public String getFeature() {
+        return feature;
     }
 
-    public void setEntity(String entity) {
-        this.entity = entity;
+    public void setFeature(String feature) {
+        this.feature = feature;
     }
 
     @Override
     public String toString() {
         return "positions " + startPos +
                 " through " + endPos +
-                " -> " + value + " " + entity;
+                " -> " + value + " " + feature;
     }
 }

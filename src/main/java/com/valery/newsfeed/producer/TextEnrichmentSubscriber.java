@@ -9,7 +9,7 @@ public class TextEnrichmentSubscriber {
 
     @Subscribe
     public void handleFeature(NewFeatureEvent event) {
-        textEnrichmentService.process(event.getFeature());
+        textEnrichmentService.process(event.getMessage());
     }
 
 }
