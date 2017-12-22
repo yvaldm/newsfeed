@@ -2,7 +2,7 @@ package com.valery.newsfeed.reader;
 
 import com.google.common.eventbus.EventBus;
 import com.valery.newsfeed.pubsub.EventBusSingleton;
-import com.valery.newsfeed.pubsub.NewMessageEvent;
+import com.valery.newsfeed.pubsub.RawTextEvent;
 import facebook4j.Event;
 import facebook4j.Facebook;
 import facebook4j.FacebookException;
@@ -38,7 +38,7 @@ public class FacebookStreamReader implements Runnable {
             while (true) {
                 facebookEvents = facebook.searchEvents("Trump");
                 EventBus eventBus = EventBusSingleton.getInstance();
-                facebookEvents.stream().forEach(event -> eventBus.post(new NewMessageEvent(event.getName())));
+                facebookEvents.stream().forEach(event -> eventBus.post(new RawTextEvent(event.getName())));
                 Thread.sleep(5000); // fetch new info every 5 seconds
             }
 

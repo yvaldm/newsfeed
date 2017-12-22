@@ -1,10 +1,10 @@
-package com.valery.newsfeed.tokenizer;
+package com.valery.newsfeed.analyzer;
 
 import com.google.common.eventbus.EventBus;
 import com.valery.newsfeed.entity.Message;
 import com.valery.newsfeed.entity.Word;
+import com.valery.newsfeed.pubsub.AnalyzedTextEvent;
 import com.valery.newsfeed.pubsub.EventBusSingleton;
-import com.valery.newsfeed.pubsub.NewFeatureEvent;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.Annotation;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 
-public class TokenizerService {
+public class TextAnalysisService {
 
     private static Properties props = new Properties();
 
@@ -54,7 +54,7 @@ public class TokenizerService {
         }
 
         Message featuredMessage = new Message(words);
-        NewFeatureEvent newFeatureEvent = new NewFeatureEvent(featuredMessage);
+        AnalyzedTextEvent newFeatureEvent = new AnalyzedTextEvent(featuredMessage);
         eventBus.post(newFeatureEvent);
     }
 

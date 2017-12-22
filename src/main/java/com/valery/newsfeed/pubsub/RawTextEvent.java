@@ -1,10 +1,10 @@
 package com.valery.newsfeed.pubsub;
 
-public class NewMessageEvent {
+public class RawTextEvent {
 
     private String text;
 
-    public NewMessageEvent(String text) {
+    public RawTextEvent(String text) {
         this.text = text;
     }
 

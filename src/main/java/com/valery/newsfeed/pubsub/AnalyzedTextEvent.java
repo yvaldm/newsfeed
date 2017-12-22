@@ -2,11 +2,11 @@ package com.valery.newsfeed.pubsub;
 
 import com.valery.newsfeed.entity.Message;
 
-public class NewFeatureEvent {
+public class AnalyzedTextEvent {
 
     private Message message;
 
-    public NewFeatureEvent(Message feature) {
+    public AnalyzedTextEvent(Message feature) {
         this.message = feature;
     }
 

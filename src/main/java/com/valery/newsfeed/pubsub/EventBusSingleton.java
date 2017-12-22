@@ -1,8 +1,8 @@
 package com.valery.newsfeed.pubsub;
 
 import com.google.common.eventbus.EventBus;
+import com.valery.newsfeed.analyzer.TextAnalysisSubscriber;
 import com.valery.newsfeed.producer.TextEnrichmentSubscriber;
-import com.valery.newsfeed.tokenizer.TokenizerSubscriber;
 
 public class EventBusSingleton {
 
@@ -15,7 +15,7 @@ public class EventBusSingleton {
 
         if (INSTANCE == null) {
             INSTANCE = new EventBus();
-            INSTANCE.register(new TokenizerSubscriber());
+            INSTANCE.register(new TextAnalysisSubscriber());
             INSTANCE.register(new TextEnrichmentSubscriber());
         }
 

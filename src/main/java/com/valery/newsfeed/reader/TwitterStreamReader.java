@@ -2,7 +2,7 @@ package com.valery.newsfeed.reader;
 
 import com.google.common.eventbus.EventBus;
 import com.valery.newsfeed.pubsub.EventBusSingleton;
-import com.valery.newsfeed.pubsub.NewMessageEvent;
+import com.valery.newsfeed.pubsub.RawTextEvent;
 import twitter4j.Status;
 import twitter4j.StatusAdapter;
 import twitter4j.TwitterStream;
@@ -42,7 +42,7 @@ public class TwitterStreamReader implements Runnable {
 
             String lang = status.getLang();
             if ("en".equals(lang)) {
-                eventBus.post(new NewMessageEvent(status.getText()));
+                eventBus.post(new RawTextEvent(status.getText()));
             }
         }
     }

@@ -1,14 +1,14 @@
 package com.valery.newsfeed.producer;
 
 import com.google.common.eventbus.Subscribe;
-import com.valery.newsfeed.pubsub.NewFeatureEvent;
+import com.valery.newsfeed.pubsub.AnalyzedTextEvent;
 
 public class TextEnrichmentSubscriber {
 
     private TextEnrichmentService textEnrichmentService = new TextEnrichmentService();
 
     @Subscribe
-    public void handleFeature(NewFeatureEvent event) {
+    public void handleFeature(AnalyzedTextEvent event) {
         textEnrichmentService.process(event.getMessage());
     }
 
